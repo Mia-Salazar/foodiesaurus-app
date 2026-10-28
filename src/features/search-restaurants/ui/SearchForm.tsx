@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -23,6 +24,14 @@ export function SearchForm({
   const [province, setProvince] = useState(initialProvince);
   const [term, setTerm] = useState(initialTerm);
 
+  const search = () => {
+    const trimmed = term.trim();
+    router.push({
+      pathname: "/restaurants",
+      params: trimmed ? { province, term: trimmed } : { province },
+    });
+  };
+
   return (
     <View style={styles.band}>
       <Text accessibilityRole="header" style={styles.title}>
@@ -40,7 +49,7 @@ export function SearchForm({
         value={province}
         onChange={(next: SearchProvince) => setProvince(next)}
       />
-      <Button label="Buscar" />
+      <Button label="Buscar" onPress={search} />
     </View>
   );
 }
