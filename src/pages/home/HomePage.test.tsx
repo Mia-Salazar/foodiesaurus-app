@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react-native";
+import { render, userEvent } from "@testing-library/react-native";
 
 import { HomePage } from "./HomePage";
 
@@ -31,6 +31,14 @@ describe("Given the home search", () => {
     ).toBeTruthy();
 
     expect(view.getByText("Provincia")).toBeTruthy();
+    expect(view.getByRole("button", { name: "Madrid" }).props.accessibilityState).toEqual({
+      expanded: false,
+    });
+    expect(view.queryAllByRole("radio")).toHaveLength(0);
+
+    const user = userEvent.setup();
+    await user.press(view.getByRole("button", { name: "Madrid" }));
+
     expect(
       view.getAllByRole("radio").map((choice) => choice.props.accessibilityLabel),
     ).toEqual(["Barcelona", "Madrid", "Sevilla"]);
