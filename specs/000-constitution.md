@@ -40,7 +40,7 @@ The app looks like the `foodiesaurus` website. These values come from that site 
 | Primary green | `#005c5c` |
 | Light green | `#317d65` |
 | Dark green | `#1f3f35` |
-| Terracotta (primary button) | `#8b3e14` |
+| Terracotta (primary button) | `#c15719` |
 | Light terracotta | `#c1571a` |
 | Dark terracotta | `#361309` |
 | Background | `#ffffff` |
