@@ -4,7 +4,7 @@ Client for [Foodiesaurus](../foodiesaurus): a way to find restaurants that work 
 
 This repository is the client only. Restaurants, scores, and accounts stay in the `foodiesaurus` API. This app shows that data and sends what the API already accepts.
 
-There is no application code yet, and no stack chosen. The plan of the first feature chooses the stack.
+There is no application code yet. The first feature's plan chooses the stack.
 
 ## How work happens
 
@@ -25,8 +25,11 @@ Fixed rules live in the constitution. If a spec contradicts them, the spec is co
 | --- | --- |
 | [specs/000-constitution.md](specs/000-constitution.md) | Product, client boundary, Spanish copy, accessibility, and the look taken from the website |
 | [specs/001-api-contract.md](specs/001-api-contract.md) | HTTP endpoints, bodies, and status codes as `foodiesaurus` exposes them today |
+| [specs/002-search-restaurants.md](specs/002-search-restaurants.md) | First feature: search by province and name, sort, and open one restaurant |
+| [specs/003-search-restaurants-plan.md](specs/003-search-restaurants-plan.md) | How that feature is built: a React Native app that calls the existing API |
+| [specs/004-search-restaurants-tasks.md](specs/004-search-restaurants-tasks.md) | Ordered tasks for that feature; each one is done when its test passes |
 
-The first feature will be restaurant search. It uses `GET /api/restaurants` and `GET /api/restaurants/{id}`.
+The first feature is restaurant search. It uses `GET /api/restaurants` and `GET /api/restaurants/{id}`.
 
 ## Backend
 
