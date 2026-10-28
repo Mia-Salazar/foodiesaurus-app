@@ -102,6 +102,8 @@ The control is a native picker labelled `Ordenar`, with the three sentences from
 
 ## Files
 
+The layout is the client half of Foodiesaurus: Feature-Sliced Design and Atomic Design. Routes stay thin. The README records the same tree.
+
 ```text
 app/
   _layout.tsx
@@ -109,19 +111,29 @@ app/
   restaurants/index.tsx
   restaurants/[id].tsx
 src/
-  api/restaurants.ts
-  lib/formatScore.ts
-  lib/sortRestaurants.ts
-  components/SearchForm.tsx
-  components/RestaurantCard.tsx
-  theme.ts
+  pages/
+  widgets/
+  features/search-restaurants/
+    api/restaurants.ts
+    lib/sortRestaurants.ts
+  entities/restaurant/
+    model/
+    lib/formatScore.ts
+    ui/RestaurantCard.tsx
+  shared/
+    api/config.ts
+    theme.ts
+    locale.ts
+    ui/atoms/
 assets/
   rita.png
 ```
 
-`src/api/restaurants.ts` is the only module that calls `fetch`. It returns the `data` object or a failure the screens can tell apart: not found, and any other failure. It does not parse the English field messages into the interface.
+`features/search-restaurants/api/restaurants.ts` is the only module that calls `fetch`. It returns the `data` object or a failure the screens can tell apart: not found, and any other failure. It does not parse the English field messages into the interface. The origin comes from `shared/api/config.ts`.
 
-`theme.ts` holds the constitution colors. Screens do not invent a second palette.
+`shared/theme.ts` holds the constitution colors. Screens do not invent a second palette.
+
+Task 1 still has `src/theme.ts`, `src/locale.ts`, and `src/api/config.ts`. The task that first needs each file moves it into this tree.
 
 ## Verification
 

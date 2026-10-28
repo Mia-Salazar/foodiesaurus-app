@@ -4,7 +4,69 @@ Client for [Foodiesaurus](../foodiesaurus): a way to find restaurants that work 
 
 This repository is the client only. Restaurants, scores, and accounts stay in the `foodiesaurus` API. This app shows that data and sends what the API already accepts.
 
-There is no application code yet. The first feature's plan chooses the stack.
+The first feature is a React Native app. Task 1 is the shell: Expo Router, Spanish locale, and the constitution colors. It does not call the API yet.
+
+## Technologies
+
+Same client ideas as [Foodiesaurus](../foodiesaurus), on a phone instead of Next.js.
+
+| Piece | Choice |
+| --- | --- |
+| UI | React Native and TypeScript |
+| Toolchain | Expo |
+| Navigation | Expo Router, on top of React Navigation |
+| Styles | React Native styles. Colors, Teko, and 44 px targets come from the website |
+| Package manager | [pnpm](https://pnpm.io) |
+| Tests | Jest and React Native Testing Library |
+
+The API, the database, and the business rules stay in `foodiesaurus`: Next.js, Prisma, and PostgreSQL. This app does not import Prisma.
+
+## Architecture
+
+The website is a modular monolith. This repository is only its client. The frontend follows the same two ideas:
+
+- **Feature-Sliced Design** for screens, actions, and entities.
+- **Atomic Design** for shared UI.
+
+Clean Architecture and domain logic stay in `foodiesaurus`. A screen calls the HTTP API. It does not recalculate scores or averages.
+
+```text
+foodiesaurus-app/
+├── app/                         # Expo Router. Thin routes only.
+│   ├── _layout.tsx
+│   ├── index.tsx                # Home
+│   └── restaurants/
+│       ├── index.tsx            # Results
+│       └── [id].tsx             # Detail
+│
+└── src/
+    ├── pages/                   # One screen per route
+    ├── widgets/                 # Large blocks reused across screens
+    ├── features/                # One user action
+    │   └── search-restaurants/
+    │       ├── api/             # The only fetch calls
+    │       └── lib/             # sortRestaurants
+    ├── entities/
+    │   └── restaurant/
+    │       ├── model/
+    │       ├── lib/             # formatScore
+    │       └── ui/              # RestaurantCard
+    └── shared/                  # No business meaning
+        ├── api/                 # EXPO_PUBLIC_API_URL
+        ├── theme.ts
+        ├── locale.ts
+        └── ui/atoms/            # Button, Input, Loader
+```
+
+Dependency direction, as on the website:
+
+- `shared` does not import pages, widgets, features, or entities.
+- `entities` do not import features or pages.
+- `features` may use entities and shared.
+- `pages` compose widgets, features, entities, and shared.
+- A route in `app/` renders a page and does not call `fetch`.
+
+Task 1 still keeps `src/theme.ts`, `src/locale.ts`, and `src/api/config.ts` at the top of `src/`. Later tasks move them into the layers above.
 
 ## How work happens
 
@@ -30,6 +92,18 @@ Fixed rules live in the constitution. If a spec contradicts them, the spec is co
 | [specs/004-search-restaurants-tasks.md](specs/004-search-restaurants-tasks.md) | Ordered tasks for that feature; each one is done when its test passes |
 
 The first feature is restaurant search. It uses `GET /api/restaurants` and `GET /api/restaurants/{id}`.
+
+## Run the app
+
+From this directory:
+
+```bash
+pnpm install
+pnpm test
+pnpm start
+```
+
+`EXPO_PUBLIC_API_URL` in `.env` is `http://localhost:3000`. Use `http://10.0.2.2:3000` on the Android emulator.
 
 ## Backend
 
