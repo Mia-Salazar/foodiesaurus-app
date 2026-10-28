@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 
-import { getApiOrigin } from "@/api/config";
+import { getApiOrigin } from "@/shared/api/config";
 import { appLocale } from "@/shared/locale";
 import { theme } from "@/shared/theme";
 
@@ -46,10 +46,13 @@ describe("Given the app shell", () => {
   it("Then EXPO_PUBLIC_API_URL is the only API origin", () => {
     expect(getApiOrigin()).toBe("http://localhost:3000");
 
+    const fetchModule = path.normalize(
+      path.join(projectRoot, "src/features/search-restaurants/api/restaurants.ts"),
+    );
     const sources = [...sourceFiles("app"), ...sourceFiles("src")];
     for (const file of sources) {
       const text = readFileSync(file, "utf8");
-      expect(text.includes("fetch(")).toBe(false);
+      expect(text.includes("fetch(")).toBe(path.normalize(file) === fetchModule);
       expect(text.includes("http://")).toBe(false);
       expect(text.includes("https://")).toBe(false);
     }
