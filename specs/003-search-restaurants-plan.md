@@ -133,7 +133,7 @@ assets/
 
 `shared/theme.ts` holds the constitution colors. Screens do not invent a second palette.
 
-Task 1 still has `src/theme.ts`, `src/locale.ts`, and `src/api/config.ts`. The task that first needs each file moves it into this tree.
+`shared/theme.ts` and `shared/locale.ts` are in place. `src/api/config.ts` stays until the search calls the API.
 
 ## Verification
 

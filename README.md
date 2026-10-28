@@ -66,7 +66,7 @@ Dependency direction, as on the website:
 - `pages` compose widgets, features, entities, and shared.
 - A route in `app/` renders a page and does not call `fetch`.
 
-Task 1 still keeps `src/theme.ts`, `src/locale.ts`, and `src/api/config.ts` at the top of `src/`. Later tasks move them into the layers above.
+Task 1 still keeps `src/api/config.ts` at the top of `src/`. The theme and the locale already live in `shared/`.
 
 ## How work happens
 

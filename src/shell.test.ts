@@ -2,8 +2,8 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 
 import { getApiOrigin } from "@/api/config";
-import { appLocale } from "@/locale";
-import { theme } from "@/theme";
+import { appLocale } from "@/shared/locale";
+import { theme } from "@/shared/theme";
 
 const projectRoot = path.join(__dirname, "..");
 
@@ -31,7 +31,7 @@ describe("Given the app shell", () => {
       foodiesaurus: "#005c5c",
       foodiesaurusLight: "#317d65",
       foodiesaurusDark: "#1f3f35",
-      secondary: "#8b3e14",
+      secondary: "#c15719",
       secondaryLight: "#c1571a",
       secondaryDark: "#361309",
       background: "#ffffff",
