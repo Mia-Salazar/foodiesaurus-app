@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "Foodiesaurus",
+    "slug": "foodiesaurus-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "foodiesaurus",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "CFBundleDevelopmentRegion": "es",
+        "NSAppTransportSecurity": {
+          "NSAllowsLocalNetworking": true
+        }
+      }
+    },
+    "android": {
+      "usesCleartextTraffic": true
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
