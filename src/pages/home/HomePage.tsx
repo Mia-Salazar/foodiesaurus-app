@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import { SearchForm } from "@/features/search-restaurants/ui/SearchForm";
 import { theme } from "@/shared/theme";
 
-import { Hero } from "./Hero";
+import { Hero } from "./components/Hero";
 
 export function HomePage() {
   return (

@@ -1,18 +1,10 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
 import { theme } from "@/shared/theme";
 
-export function Hero() {
+export function HeroText() {
   return (
-    <View style={styles.hero}>
-      <Image
-        accessible
-        accessibilityRole="image"
-        accessibilityLabel="Rita, la dinosaurita, comiendo pizza"
-        source={require("../../../assets/rita.png")}
-        style={styles.image}
-        resizeMode="contain"
-      />
+    <>
       <Text accessibilityRole="header" style={styles.joke}>
         ¡El meteorito no me extinguió, pero unas{" "}
         <Text style={styles.gambas}>gambas</Text> casi lo hacen!
@@ -21,21 +13,11 @@ export function Hero() {
         <Text style={styles.supportName}>Rita, la dinosaurita</Text> te ayuda a
         encontrar restaurantes seguros si tienes alergia.
       </Text>
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  hero: {
-    backgroundColor: theme.color.background,
-    paddingHorizontal: 16,
-    paddingVertical: 32,
-    gap: 16,
-  },
-  image: {
-    width: "100%",
-    height: 160,
-  },
   joke: {
     color: theme.color.text,
     fontFamily: theme.font.brand,
