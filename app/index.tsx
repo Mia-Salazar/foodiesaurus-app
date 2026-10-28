@@ -1,10 +1,10 @@
 import { Stack } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-import { appLocale } from "@/locale";
-import { theme } from "@/theme";
+import { HomePage } from "@/pages/home/HomePage";
+import { appLocale } from "@/shared/locale";
 
-export default function HomeScreen() {
+export default function HomeRoute() {
   return (
     <View
       testID="home-screen"
@@ -12,7 +12,7 @@ export default function HomeScreen() {
       style={styles.screen}
     >
       <Stack.Screen options={{ title: "Inicio" }} />
-      <Text style={styles.text}>Inicio</Text>
+      <HomePage />
     </View>
   );
 }
@@ -20,11 +20,5 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: theme.color.background,
-    padding: 16,
-  },
-  text: {
-    color: theme.color.text,
-    fontSize: 16,
   },
 });

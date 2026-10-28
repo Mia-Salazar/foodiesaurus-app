@@ -2,8 +2,8 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 
 import { getApiOrigin } from "@/api/config";
-import { appLocale } from "@/locale";
-import { theme } from "@/theme";
+import { appLocale } from "@/shared/locale";
+import { theme } from "@/shared/theme";
 
 const projectRoot = path.join(__dirname, "..");
 

@@ -1,8 +1,8 @@
 import { Stack, useLocalSearchParams } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 
-import { appLocale } from "@/locale";
-import { theme } from "@/theme";
+import { appLocale } from "@/shared/locale";
+import { theme } from "@/shared/theme";
 
 export default function DetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();

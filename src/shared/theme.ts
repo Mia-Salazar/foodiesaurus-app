@@ -13,4 +13,8 @@ export const theme = {
   focusWidth: 3,
   focusOffset: 2,
   buttonMinHeight: 44,
+  font: {
+    brand: "Teko_700Bold",
+    brandSemi: "Teko_600SemiBold",
+  },
 } as const;
