@@ -1,10 +1,10 @@
 import { Stack } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
+import { ResultsPage } from "@/pages/restaurants/ResultsPage";
 import { appLocale } from "@/shared/locale";
-import { theme } from "@/shared/theme";
 
-export default function ResultsScreen() {
+export default function ResultsRoute() {
   return (
     <View
       testID="results-screen"
@@ -12,7 +12,7 @@ export default function ResultsScreen() {
       style={styles.screen}
     >
       <Stack.Screen options={{ title: "Restaurantes" }} />
-      <Text style={styles.text}>Restaurantes</Text>
+      <ResultsPage />
     </View>
   );
 }
@@ -20,11 +20,5 @@ export default function ResultsScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: theme.color.background,
-    padding: 16,
-  },
-  text: {
-    color: theme.color.text,
-    fontSize: 16,
   },
 });

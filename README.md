@@ -4,7 +4,7 @@ Client for [Foodiesaurus](../foodiesaurus): a way to find restaurants that work 
 
 This repository is the client only. Restaurants, scores, and accounts stay in the `foodiesaurus` API. This app shows that data and sends what the API already accepts.
 
-The first feature is a React Native app. Task 1 is the shell: Expo Router, Spanish locale, and the constitution colors. It does not call the API yet.
+The first feature is a React Native app: Expo Router, Spanish locale, the constitution colors, and search against the existing API.
 
 ## Technologies
 
@@ -66,7 +66,7 @@ Dependency direction, as on the website:
 - `pages` compose widgets, features, entities, and shared.
 - A route in `app/` renders a page and does not call `fetch`.
 
-Task 1 still keeps `src/api/config.ts` at the top of `src/`. The theme and the locale already live in `shared/`.
+The theme, the locale, and the API origin live in `shared/`. Search is the only `fetch`, in `features/search-restaurants/api/restaurants.ts`.
 
 ## How work happens
 

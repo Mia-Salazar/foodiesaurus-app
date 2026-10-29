@@ -133,7 +133,7 @@ assets/
 
 `shared/theme.ts` holds the constitution colors. Screens do not invent a second palette.
 
-`shared/theme.ts` and `shared/locale.ts` are in place. `src/api/config.ts` stays until the search calls the API.
+`shared/theme.ts`, `shared/locale.ts`, and `shared/api/config.ts` are in place. Search is the only `fetch`.
 
 ## Verification
 
