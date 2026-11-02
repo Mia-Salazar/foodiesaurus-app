@@ -30,7 +30,7 @@ type ReadySearch = {
 export function ResultsPage() {
   const params = useLocalSearchParams<{ province?: string; term?: string }>();
   const province = single(params.province);
-  const term = single(params.term);
+  const term = single(params.term)?.trim() || undefined;
   const key = province ? searchKey(province, term) : null;
   const [ready, setReady] = useState<ReadySearch | null>(null);
   const [failedKey, setFailedKey] = useState<string | null>(null);
@@ -66,6 +66,9 @@ export function ResultsPage() {
       <Text accessibilityRole="header" style={styles.title}>
         {title}
       </Text>
+      {term ? (
+        <Text style={styles.match}>{`Restaurantes que coinciden con ${term}`}</Text>
+      ) : null}
       {province ? (
         <SearchForm initialProvince={province} initialTerm={term ?? ""} />
       ) : null}
@@ -97,6 +100,10 @@ const styles = StyleSheet.create({
     color: theme.color.text,
     fontFamily: theme.font.brand,
     fontSize: 36,
+  },
+  match: {
+    color: theme.color.text,
+    fontSize: 16,
   },
   status: {
     flexDirection: "row",

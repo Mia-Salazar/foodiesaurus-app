@@ -6,6 +6,27 @@ This repository is the client only. Restaurants, scores, and accounts stay in th
 
 The first feature is a React Native app: Expo Router, Spanish locale, the constitution colors, and search against the existing API.
 
+## Status
+
+**In progress.** Restaurant search is the only feature underway, and it is not finished. The app can be opened and searched. It is not ready to publish.
+
+Done:
+
+- The shell: Spanish locale, constitution colors, and the routes `/`, `/restaurants`, and `/restaurants/:id`.
+- The home search, with Rita and the province form.
+- Search by province. Each match is a card, the score is `7` or `7,5` plus `/10`, and the order is by name.
+- The loading sentence `Buscando restaurantes.` The previous list is hidden while that request is in flight.
+- Search by name. A padded name is trimmed, and the results say `Restaurantes que coinciden con {name}`.
+
+Not built yet:
+
+- Sort.
+- Opening a restaurant. `Ver {name}` is on the card, and the detail route is still a placeholder.
+- Empty results, a results screen with no province, and search or detail failures.
+- A pass on a phone or a simulator.
+
+Still out of this feature: creating a restaurant, signing in, the profile, deleting an account, the map, the averages breakdown, comments, scoring, and editing.
+
 ## Technologies
 
 Same client ideas as [Foodiesaurus](../foodiesaurus), on a phone instead of Next.js.
