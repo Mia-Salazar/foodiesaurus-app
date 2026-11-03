@@ -1,12 +1,16 @@
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { Restaurant } from "@/entities/restaurant/model/restaurant";
 import { RestaurantCard } from "@/entities/restaurant/ui/RestaurantCard";
 import { searchRestaurants } from "@/features/search-restaurants/api/restaurants";
-import { sortByName } from "@/features/search-restaurants/lib/sortRestaurants";
+import {
+  restaurantSort,
+  sortRestaurants,
+} from "@/features/search-restaurants/lib/sortRestaurants";
 import { SearchForm } from "@/features/search-restaurants/ui/SearchForm";
+import { SortField } from "@/features/search-restaurants/ui/SortField";
 import { theme } from "@/shared/theme";
 import { Loader } from "@/shared/ui/atoms/Loader";
 
@@ -28,9 +32,10 @@ type ReadySearch = {
 };
 
 export function ResultsPage() {
-  const params = useLocalSearchParams<{ province?: string; term?: string }>();
+  const params = useLocalSearchParams<{ province?: string; term?: string; sort?: string }>();
   const province = single(params.province);
   const term = single(params.term)?.trim() || undefined;
+  const sort = restaurantSort(single(params.sort));
   const key = province ? searchKey(province, term) : null;
   const [ready, setReady] = useState<ReadySearch | null>(null);
   const [failedKey, setFailedKey] = useState<string | null>(null);
@@ -49,7 +54,7 @@ export function ResultsPage() {
         setFailedKey(key);
         return;
       }
-      setReady({ key, restaurants: sortByName(result.restaurants) });
+      setReady({ key, restaurants: result.restaurants });
     });
 
     return () => {
@@ -57,7 +62,15 @@ export function ResultsPage() {
     };
   }, [province, term, key]);
 
-  const restaurants = ready?.key === key ? ready.restaurants : null;
+  const restaurants =
+    ready?.key === key ? sortRestaurants(ready.restaurants, sort) : null;
+
+  const chooseSort = (next: typeof sort) => {
+    if (!province || next === sort) {
+      return;
+    }
+    router.setParams(next === "name" ? { sort: undefined } : { sort: next });
+  };
   const loading = key != null && restaurants == null && failedKey !== key;
   const title = province ? `Restaurantes en ${province}` : "Restaurantes";
 
@@ -77,6 +90,9 @@ export function ResultsPage() {
           <Loader />
           <Text style={styles.statusText}>Buscando restaurantes.</Text>
         </View>
+      ) : null}
+      {restaurants !== null && restaurants.length > 0 ? (
+        <SortField value={sort} onChange={chooseSort} />
       ) : null}
       {restaurants !== null ? (
         <>
