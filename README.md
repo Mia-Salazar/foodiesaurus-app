@@ -19,10 +19,11 @@ Done:
 - Search by name. A padded name is trimmed, and the results say `Restaurantes que coinciden con {name}`.
 - Sort. `Ordenar` orders by name or by score, and that choice stays on the results route.
 - Opening a restaurant. `Ver {name}` loads its name, province, address, phone, website, food type, and score out of 10.
+- The detail loading sentence `Cargando el restaurante.`
 
 Not built yet:
 
-- The detail loading sentence, a restaurant with no scores, and the way back to the province list.
+- A restaurant with no scores, and the way back to the province list.
 - Empty results, a results screen with no province, and search or detail failures.
 - A pass on a phone or a simulator.
 
