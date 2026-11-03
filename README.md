@@ -17,10 +17,10 @@ Done:
 - Search by province. Each match is a card, the score is `7` or `7,5` plus `/10`, and the order is by name.
 - The loading sentence `Buscando restaurantes.` The previous list is hidden while that request is in flight.
 - Search by name. A padded name is trimmed, and the results say `Restaurantes que coinciden con {name}`.
+- Sort. `Ordenar` orders by name or by score, and that choice stays on the results route.
 
 Not built yet:
 
-- Sort.
 - Opening a restaurant. `Ver {name}` is on the card, and the detail route is still a placeholder.
 - Empty results, a results screen with no province, and search or detail failures.
 - A pass on a phone or a simulator.
