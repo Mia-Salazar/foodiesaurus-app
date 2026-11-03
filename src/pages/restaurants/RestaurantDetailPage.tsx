@@ -6,6 +6,7 @@ import { formatScore } from "@/entities/restaurant/lib/formatScore";
 import { RestaurantDetail } from "@/entities/restaurant/model/restaurant";
 import { getRestaurant } from "@/features/search-restaurants/api/restaurants";
 import { theme } from "@/shared/theme";
+import { Loader } from "@/shared/ui/atoms/Loader";
 
 function single(value: string | string[] | undefined): string | undefined {
   return typeof value === "string" && value.length > 0 ? value : undefined;
@@ -29,7 +30,8 @@ function opinionCopy(count: number): string {
 export function RestaurantDetailPage() {
   const params = useLocalSearchParams<{ id: string }>();
   const id = single(params.id);
-  const [restaurant, setRestaurant] = useState<RestaurantDetail | null>(null);
+  const [ready, setReady] = useState<{ id: string; restaurant: RestaurantDetail } | null>(null);
+  const [failedId, setFailedId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) {
@@ -38,16 +40,32 @@ export function RestaurantDetailPage() {
 
     let active = true;
     getRestaurant(id).then((result) => {
-      if (!active || !result.ok) {
+      if (!active) {
         return;
       }
-      setRestaurant(result.restaurant);
+      if (!result.ok) {
+        setFailedId(id);
+        return;
+      }
+      setReady({ id, restaurant: result.restaurant });
     });
 
     return () => {
       active = false;
     };
   }, [id]);
+
+  const restaurant = ready != null && ready.id === id ? ready.restaurant : null;
+  const loading = id != null && restaurant == null && failedId !== id;
+
+  if (loading) {
+    return (
+      <View accessibilityLiveRegion="polite" style={styles.status}>
+        <Loader />
+        <Text style={styles.statusText}>Cargando el restaurante.</Text>
+      </View>
+    );
+  }
 
   if (!restaurant) {
     return null;
@@ -109,6 +127,16 @@ const styles = StyleSheet.create({
     gap: 12,
     padding: 16,
     backgroundColor: theme.color.background,
+  },
+  status: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    padding: 16,
+  },
+  statusText: {
+    color: theme.color.text,
+    fontSize: 16,
   },
   name: {
     color: theme.color.text,
