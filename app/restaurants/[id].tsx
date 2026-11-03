@@ -1,12 +1,10 @@
-import { Stack, useLocalSearchParams } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { Stack } from "expo-router";
+import { StyleSheet, View } from "react-native";
 
+import { RestaurantDetailPage } from "@/pages/restaurants/RestaurantDetailPage";
 import { appLocale } from "@/shared/locale";
-import { theme } from "@/shared/theme";
 
-export default function DetailScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
-
+export default function DetailRoute() {
   return (
     <View
       testID="detail-screen"
@@ -14,7 +12,7 @@ export default function DetailScreen() {
       style={styles.screen}
     >
       <Stack.Screen options={{ title: "Restaurante" }} />
-      <Text style={styles.text}>{id}</Text>
+      <RestaurantDetailPage />
     </View>
   );
 }
@@ -22,11 +20,5 @@ export default function DetailScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: theme.color.background,
-    padding: 16,
-  },
-  text: {
-    color: theme.color.text,
-    fontSize: 16,
   },
 });

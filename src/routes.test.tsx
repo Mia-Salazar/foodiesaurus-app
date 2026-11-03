@@ -30,12 +30,10 @@ describe("Given the app shell", () => {
     expect(global.fetch).not.toHaveBeenCalled();
   });
 
-  it("When I open /restaurants/1, Then I see that restaurant route and fetch is not called", async () => {
+  it("When I open /restaurants/1, Then I see that restaurant route", async () => {
     const view = await renderRouter(appDirectory, { initialUrl: "/restaurants/1" });
 
     expect(view.getByTestId("detail-screen").props.accessibilityLanguage).toBe("es");
-    expect(view.getByText("1")).toBeTruthy();
     expect(view.getPathname()).toBe("/restaurants/1");
-    expect(global.fetch).not.toHaveBeenCalled();
   });
 });
