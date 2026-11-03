@@ -89,7 +89,9 @@ export function RestaurantDetailPage() {
           </View>
           <Text style={styles.opinions}>{opinionCopy(restaurant.averages.totalReviews)}</Text>
         </View>
-      ) : null}
+      ) : (
+        <Text style={styles.body}>Sin puntuaciones todavía.</Text>
+      )}
       <Text style={styles.section}>Datos del restaurante</Text>
       {present(address) ? <Text style={styles.body}>{address}</Text> : null}
       {present(restaurant.phone) ? (
